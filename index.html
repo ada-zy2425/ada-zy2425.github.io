@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zhilu Yang</title>
+  <meta name="description" content="Zhilu Yang works on reliable 3D vision, multi-view geometry, spatial intelligence, and geometry-grounded learning.">
+  <meta name="author" content="Zhilu Yang">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="canonical" href="https://ada-zy2425.github.io/">
+<link rel="stylesheet" href="assets/styles.css">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Zhilu Yang">
+  <meta property="og:description" content="Reliable 3D vision, multi-view geometry, and spatial intelligence.">
+  <meta property="og:url" content="https://ada-zy2425.github.io/">
+  <meta property="og:image" content="https://ada-zy2425.github.io/assets/og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+  <main class="page">
+    <header class="profile-header" id="top">
+      <div class="header-row">
+        <h1>Zhilu Yang</h1>
+        <nav aria-label="Page navigation">
+          <a href="#research">Research</a>
+          <a href="#publication">Publication</a>
+        </nav>
+      </div>
+
+      <p class="affiliation">
+        MSc in
+        <a href="https://www.imperial.ac.uk/engineering/departments/earth-science/prosp-students/pg-courses/data-science-ml/" target="_blank" rel="noreferrer">
+          Environmental Data Science and Machine Learning
+        </a>
+      </p>
+      <p class="affiliation">
+        <a href="https://www.imperial.ac.uk/engineering/departments/earth-science/" target="_blank" rel="noreferrer">
+          Department of Earth Science and Engineering
+        </a>,
+        <a href="https://www.imperial.ac.uk/" target="_blank" rel="noreferrer">
+          Imperial College London
+        </a>
+      </p>
+      <p class="contact">
+        Email:
+        <a href="mailto:yyang121013@gmail.com">yyang121013@gmail.com</a>
+        <span aria-hidden="true">·</span>
+        <a href="https://openaccess.thecvf.com/content/CVPR2026/html/Yang_Factorize_Reconstruct_Enhance_A_Unified_Framework_for_Multimodal_Sentiment_Analysis_CVPR_2026_paper.html" target="_blank" rel="noreferrer">
+          CVPR 2026 paper
+        </a>
+      </p>
+    </header>
+
+    <section class="about" aria-labelledby="about-heading">
+      <h2 id="about-heading">About Me</h2>
+      <p>
+        I am currently completing an MSc in Environmental Data Science and Machine Learning
+        in the Department of Earth Science and Engineering at Imperial College London.
+      </p>
+      <p>
+        My research focuses on reliable 3D vision, multi-view geometry, and spatial intelligence.
+        I am interested in geometry-grounded learning systems that recover metric 3D structure
+        from imperfect observations, resolve ambiguity through geometric reasoning and verification,
+        and generalize across viewpoints, scales, and sensing conditions.
+      </p>
+      <p>
+        I am currently seeking a full-time Research Assistant or Research Engineer position
+        starting in September or October 2026, and I am open to research collaborations in
+        3D vision, physical AI, and embodied perception.
+      </p>
+    </section>
+
+    <section id="research" aria-labelledby="research-heading">
+      <h2 id="research-heading">Research Projects</h2>
+
+      <article class="research-item">
+        <a class="research-image" href="assets/images/metricmvhand.png" target="_blank" rel="noreferrer">
+          <img src="assets/images/metricmvhand.png"
+               alt="MetricMVHand architecture showing learned observation correction and relative view weighting before weighted DLT and camera-constrained hand-prior coupling.">
+        </a>
+        <div class="research-copy">
+          <h3>MetricMVHand: Measurement-First Multi-View Hand Reconstruction</h3>
+          <p class="venue">Ongoing research · Multi-view hand reconstruction</p>
+          <p>
+            A frozen HaMeR backbone with trainable LoRA and cross-view evidence predicts a
+            bounded 2D residual and relative view-weight logits before explicit weighted DLT.
+            Metric geometry is then coupled with the HaMeR joint and mesh prior to recover the
+            final camera-space hand mesh.
+          </p>
+          <p class="result">DexYCB-MV matched protocol: 4.731 mm MPJPE · 4.742 mm MPVPE.</p>
+          <p class="links"><a href="assets/images/metricmvhand.png" target="_blank" rel="noreferrer">Figure</a></p>
+        </div>
+      </article>
+
+      <article class="research-item">
+        <a class="research-image" href="assets/images/extreme-view.png" target="_blank" rel="noreferrer">
+          <img src="assets/images/extreme-view.png"
+               alt="Extreme-view relative-pose architecture where the solve set generates hypotheses and a fit-disjoint verification set scores them before pose-medoid selection.">
+        </a>
+        <div class="research-copy">
+          <h3>Fit-Disjoint Verification for Extreme-View Relative Pose</h3>
+          <p class="venue">Ongoing research · Extreme-view two-view geometry</p>
+          <p>
+            A learned ranker assigns correspondences to disjoint solve and verification roles.
+            The solve set generates nine pose hypotheses, while fitting-excluded epipolar evidence
+            contributes to a unified ranking before a top-three Pose Medoid selects one existing candidate.
+          </p>
+          <p class="result">Positive gains across primary, replication, and Full32 evaluation settings.</p>
+          <p class="links"><a href="assets/images/extreme-view.png" target="_blank" rel="noreferrer">Figure</a></p>
+        </div>
+      </article>
+
+      <article class="research-item">
+        <a class="research-image" href="assets/images/conddepth.png" target="_blank" rel="noreferrer">
+          <img src="assets/images/conddepth.png"
+               alt="CondDepth architecture showing frozen root-relative hand reconstruction and structured UVZ root calibration for camera-space placement.">
+        </a>
+        <div class="research-copy">
+          <h3>CondDepth: Projective Root Calibration for Camera-Space Hand Recovery</h3>
+          <p class="venue">Ongoing research · Camera-space hand recovery</p>
+          <p>
+            A frozen crop-centric reconstructor supplies the root-relative hand mesh.
+            A structured UVZ calibrator uses frozen features, crop/full-camera metadata,
+            and camera intrinsics to recover global camera-space placement without changing articulation.
+          </p>
+          <p class="result">DexYCB S0: 28.65 mm on the matched primary subset · 30.99 mm on the full population.</p>
+          <p class="links"><a href="assets/images/conddepth.png" target="_blank" rel="noreferrer">Figure</a></p>
+        </div>
+      </article>
+
+      <article class="research-item">
+        <a class="research-image" href="assets/images/fuse-net.png" target="_blank" rel="noreferrer">
+          <img src="assets/images/fuse-net.png"
+               alt="FUSE-Net architecture showing modality-wise factorization, semantic-preserving reconstruction, and sample-adaptive factor allocation.">
+        </a>
+        <div class="research-copy">
+          <h3>
+            <a href="https://openaccess.thecvf.com/content/CVPR2026/html/Yang_Factorize_Reconstruct_Enhance_A_Unified_Framework_for_Multimodal_Sentiment_Analysis_CVPR_2026_paper.html" target="_blank" rel="noreferrer">
+              Factorize, Reconstruct, Enhance: A Unified Framework for Multimodal Sentiment Analysis
+            </a>
+          </h3>
+          <p class="authors"><strong>Zhilu Yang</strong>, Mingcheng Li</p>
+          <p class="venue">IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2026</p>
+          <p>
+            FUSE-Net decomposes language, audio, and visual representations into shared,
+            modality-specific, and noise factors. Variational reconstruction preserves
+            sentiment-relevant semantics, while multi-factor dynamic fusion allocates evidence
+            at sample, factor, and branch levels.
+          </p>
+          <p class="links">
+            <a href="https://openaccess.thecvf.com/content/CVPR2026/html/Yang_Factorize_Reconstruct_Enhance_A_Unified_Framework_for_Multimodal_Sentiment_Analysis_CVPR_2026_paper.html" target="_blank" rel="noreferrer">Paper</a>
+            <span aria-hidden="true">/</span>
+            <a href="assets/papers/fuse-net-cvpr2026.pdf" target="_blank" rel="noreferrer">PDF</a>
+            <span aria-hidden="true">/</span>
+            <a href="assets/images/fuse-net.png" target="_blank" rel="noreferrer">Figure</a>
+          </p>
+        </div>
+      </article>
+    </section>
+
+    <section id="publication" aria-labelledby="publication-heading">
+      <h2 id="publication-heading">Publication</h2>
+      <p class="citation">
+        <strong>Zhilu Yang</strong>, Mingcheng Li.
+        “Factorize, Reconstruct, Enhance: A Unified Framework for Multimodal Sentiment Analysis.”
+        <em>IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</em>, 2026.
+        <a href="https://openaccess.thecvf.com/content/CVPR2026/html/Yang_Factorize_Reconstruct_Enhance_A_Unified_Framework_for_Multimodal_Sentiment_Analysis_CVPR_2026_paper.html" target="_blank" rel="noreferrer">Paper</a>
+        <span aria-hidden="true">/</span>
+        <a href="assets/papers/fuse-net-cvpr2026.pdf" target="_blank" rel="noreferrer">PDF</a>
+      </p>
+    </section>
+
+    <footer>
+      <span>© 2026 Zhilu Yang</span>
+      <a href="#top">Back to top</a>
+    </footer>
+  </main>
+</body>
+</html>
