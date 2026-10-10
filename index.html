@@ -38,14 +38,10 @@
           <p class="institution">Department of Earth Science and Engineering · Imperial College London</p>
 
           <p class="intro">
-            I work on reliable 3D vision and multi-view geometry. My current projects study metric
-            hand reconstruction, extreme-view relative pose, and camera-space recovery by combining
-            learned representations with explicit geometry.
-          </p>
-
-          <p class="availability">
-            <span class="status-dot" aria-hidden="true"></span>
-            <span>Seeking full-time Research Assistant and Research Engineer roles from autumn 2026.</span>
+            I work on reliable 3D vision and multi-view geometry, combining learned visual
+            representations with explicit geometry. My research focuses on metric hand
+            reconstruction, geometric calibration, and relative pose estimation under extreme
+            viewpoint changes.
           </p>
 
           <div class="hero-links" aria-label="Profile links">
@@ -70,41 +66,41 @@
 
         <div class="project-list">
           <article class="project-row">
-            <a class="project-visual" href="assets/images/metricmvhand.png" target="_blank" rel="noreferrer" aria-label="Open the MetricMVHand architecture figure">
-              <img src="assets/images/metricmvhand.png" width="1200" height="675" loading="lazy" alt="MetricMVHand architecture with learned observation correction, view weighting, weighted DLT, and camera-constrained hand-prior coupling.">
+            <a class="project-visual" href="assets/images/metricmvhand.png" target="_blank" rel="noreferrer" aria-label="Open the hand reconstruction project figure">
+              <img src="assets/images/metricmvhand.png" width="1200" height="675" loading="lazy" alt="Earlier hand reconstruction pipeline with observation correction, view weighting, weighted triangulation, and hand-prior coupling.">
             </a>
             <div class="project-copy">
               <p class="project-meta"><span>Research in progress</span><span aria-hidden="true">·</span><span>Multi-view hand reconstruction</span></p>
-              <h3>MetricMVHand</h3>
-              <p class="project-subtitle">Measurement-First Multi-View Hand Reconstruction</p>
-              <p class="project-summary">MetricMVHand combines learned 2D observation correction and relative view weighting with weighted DLT, then couples the reconstructed geometry to a frozen HaMeR prior for metric camera-space hand reconstruction.</p>
-              <p class="evidence">DexYCB-MV matched evaluation: 4.731 mm MPJPE and 4.742 mm MPVPE.</p>
+              <h3>Form2Frame</h3>
+              <p class="project-subtitle">Prior-Preserving Evidence Fusion for Multi-View Hand Reconstruction</p>
+              <p class="project-summary">Form2Frame places HaMeR and WiLoR hand meshes in a shared metric frame, then fuses complementary candidates across anatomical regions using geometric and visual evidence. A retained baseline mesh provides a fallback.</p>
+              <p class="evidence">Evaluated on HanCo, DexYCB-MV, and HO3D-MV. DexYCB-MV: 4.398 mm MPVPE and 4.316 mm mesh MPJPE.</p>
             </div>
           </article>
 
           <article class="project-row">
-            <a class="project-visual" href="assets/images/extreme-view.png" target="_blank" rel="noreferrer" aria-label="Open the Fit-Disjoint Verification architecture figure">
-              <img src="assets/images/extreme-view.png" width="1200" height="675" loading="lazy" alt="Extreme-view relative-pose architecture where one correspondence set fits hypotheses and a disjoint set verifies them before pose-medoid selection.">
+            <a class="project-visual" href="assets/images/extreme-view.png" target="_blank" rel="noreferrer" aria-label="Open the relative-pose project figure">
+              <img src="assets/images/extreme-view.png" width="1200" height="675" loading="lazy" alt="Earlier relative-pose pipeline showing separate hypothesis fitting and verification.">
             </a>
             <div class="project-copy">
               <p class="project-meta"><span>Research in progress</span><span aria-hidden="true">·</span><span>Two-view geometry</span></p>
-              <h3>Fit-Disjoint Verification</h3>
-              <p class="project-subtitle">Extreme-View Relative Pose</p>
-              <p class="project-summary">This work separates correspondences used to fit pose hypotheses from those used to verify them, then selects a robust existing hypothesis through geometry-based scoring and pose-medoid consensus.</p>
-              <p class="evidence">S7C2 (800 pairs): Success@1° +14.13 pp and AUC@1 +8.08 points, with positive gains reproduced in replication and Full32 settings.</p>
+              <h3>Extreme-View Geometry Recovery (EVGR)</h3>
+              <p class="project-subtitle">Multi-Crop Verification for Relative Pose Estimation</p>
+              <p class="project-summary">EVGR generates five relative-pose candidates from global and crop-based matches, scores them against shared multi-crop correspondences using geometric consistency, and refines the selected pose using its supporting correspondences.</p>
+              <p class="evidence">Evaluated on 30,557 AerialExtreMatch pairs, with a separate A800 reference replay on a 4,096-pair subset.</p>
             </div>
           </article>
 
           <article class="project-row">
             <a class="project-visual" href="assets/images/conddepth.png" target="_blank" rel="noreferrer" aria-label="Open the CondDepth architecture figure">
-              <img src="assets/images/conddepth.png" width="1200" height="675" loading="lazy" alt="CondDepth architecture with frozen root-relative reconstruction and structured UVZ root calibration for camera-space placement.">
+              <img src="assets/images/conddepth.png" width="1200" height="675" loading="lazy" alt="Earlier CondDepth pipeline showing root calibration for camera-space placement.">
             </a>
             <div class="project-copy">
-              <p class="project-meta"><span>Research in progress</span><span aria-hidden="true">·</span><span>Camera-space recovery</span></p>
+              <p class="project-meta"><span>Research in progress</span><span aria-hidden="true">·</span><span>Geometric calibration</span></p>
               <h3>CondDepth</h3>
-              <p class="project-subtitle">Projective Root Calibration for Camera-Space Hand Recovery</p>
-              <p class="project-summary">CondDepth calibrates the global UVZ root of a frozen crop-based hand reconstructor using camera intrinsics and crop metadata, recovering metric camera-space placement without changing articulation.</p>
-              <p class="evidence">DexYCB S0 camera-space MPJPE: 28.65 mm on the matched primary subset and 30.99 mm on the full population.</p>
+              <p class="project-subtitle">Local-Tangent Ray Calibration for Metric Hand Reconstruction</p>
+              <p class="project-summary">CondDepth learns camera- and joint-specific corrections in the local tangent plane of predicted camera rays while keeping the vision model frozen. The corrected rays are triangulated to recover metric 3D hand joints.</p>
+              <p class="evidence">DexYCB development evaluation with oracle crops and 2,040 labeled calibration views: 20.35 mm median CS-MPJPE, versus 26.95 mm for matched-label readout adaptation.</p>
             </div>
           </article>
         </div>
