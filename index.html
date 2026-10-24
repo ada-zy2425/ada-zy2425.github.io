@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Zhilu Yang | 3D Vision &amp; Multi-View Geometry</title>
-  <meta name="description" content="Zhilu Yang works on reliable 3D vision, multi-view geometry, metric reconstruction, and spatial intelligence at Imperial College London.">
+  <meta name="description" content="Zhilu Yang works on reliable 3D vision, multi-view geometry, metric hand reconstruction and relative pose estimation at Imperial College London.">
   <meta name="author" content="Zhilu Yang">
   <meta name="theme-color" content="#eef1f2">
   <link rel="canonical" href="https://ada-zy2425.github.io/">
@@ -25,6 +25,7 @@
       <nav aria-label="Primary navigation">
         <a href="#top">About</a>
         <a href="#research">Research</a>
+        <a href="#engineering">Engineering</a>
         <a href="#publications">Publications</a>
       </nav>
     </header>
@@ -38,10 +39,14 @@
           <p class="institution">Department of Earth Science and Engineering · Imperial College London</p>
 
           <p class="intro">
-            I work on reliable 3D vision and multi-view geometry, combining learned visual
-            representations with explicit geometry. My research focuses on metric hand
-            reconstruction, geometric calibration, and relative pose estimation under extreme
-            viewpoint changes.
+            I build 3D vision systems that recover metric geometry from images: where a camera
+            moved, where a hand sits in space, and how large it really is. My work pairs frozen
+            foundation models with explicit geometry, and keeps every reported number tied to a
+            fixed protocol and a saved prediction file.
+          </p>
+          <p class="intro intro-secondary">
+            Current projects cover two-view relative pose under wide baselines, calibrated
+            multi-view hand meshes, and monocular camera-space hand reconstruction.
           </p>
 
           <div class="hero-links" aria-label="Profile links">
@@ -56,54 +61,228 @@
         </figure>
       </section>
 
+      <section class="highlights" aria-label="Headline results">
+        <a class="stat" href="#evgr">
+          <span class="stat-value">71.87<small>%</small></span>
+          <span class="stat-label">AUC@5 on MegaDepth-1500</span>
+          <span class="stat-project">EVGR · relative pose</span>
+        </a>
+        <a class="stat" href="#form2frame">
+          <span class="stat-value">4.39<small>mm</small></span>
+          <span class="stat-label">Mesh MPJPE on DexYCB-MV, no alignment</span>
+          <span class="stat-project">Form2Frame · multi-view hands</span>
+        </a>
+        <a class="stat" href="#conddepth">
+          <span class="stat-value">27.40<small>mm</small></span>
+          <span class="stat-label">Camera-space MPJPE on DexYCB from one RGB image</span>
+          <span class="stat-project">CondDepth · monocular metric hands</span>
+        </a>
+        <a class="stat" href="#robust-3dgs">
+          <span class="stat-value">+2.61<small>dB</small></span>
+          <span class="stat-label">Held-out PSNR after camera repair</span>
+          <span class="stat-project">Robust Sparse 3DGS · engineering</span>
+        </a>
+      </section>
+
       <section class="content-section" id="research" aria-labelledby="research-title">
         <div class="section-heading">
           <div>
             <p class="section-kicker">Current work</p>
-            <h2 id="research-title">Selected Research</h2>
+            <h2 id="research-title">Research Projects</h2>
+          </div>
+          <p class="section-note">Each project below is under active development. Numbers come from the project's frozen result files; the protocol is stated next to each table.</p>
+        </div>
+
+        <!-- ============ EVGR ============ -->
+        <article class="project" id="evgr">
+          <header class="project-head">
+            <p class="project-meta"><span>Research in progress</span><span aria-hidden="true">·</span><span>Two-view geometry</span></p>
+            <h3>Extreme-View Geometry Recovery (EVGR)</h3>
+            <p class="project-subtitle">Source-conditioned routing over complementary relative-pose hypotheses</p>
+          </header>
+
+          <a class="project-figure" href="assets/images/evgr-architecture.png" target="_blank" rel="noreferrer" aria-label="Open the full EVGR architecture figure">
+            <img src="assets/images/evgr-architecture.png" width="3600" height="1440" loading="lazy" alt="EVGR architecture. Stage I builds three complete relative poses from dense matching with PoseLib, depth-assisted MADPose, and direct camera regression. Stage II scores each candidate with a shared MLP over geometric features. Stage III switches away from the default matching pose only when another candidate is predicted better in both rotation and translation.">
+          </a>
+
+          <div class="project-body">
+            <div class="project-text">
+              <p class="project-summary">
+                EVGR estimates the relative pose between two calibrated images. Dense matching,
+                depth-assisted solving and direct camera regression each fail on different pairs,
+                so EVGR keeps all three as complete pose hypotheses. A small learned router then
+                predicts each candidate's rotation and translation error from geometry alone and
+                returns one unchanged pose.
+              </p>
+              <ul class="ideas">
+                <li><strong>Three complete sources.</strong> RoMa-Ω matches feed calibrated PoseLib and, with monocular depth, MADPose; a camera regressor gives a third, matching-free pose.</li>
+                <li><strong>Route, don't average.</strong> Features are Sampson residuals on the matching support, cross-candidate rotation/translation distances, and coverage statistics.</li>
+                <li><strong>Dominance-gated switch.</strong> The matching pose stays the default; the router leaves it only when a candidate is predicted better on both error axes.</li>
+              </ul>
+            </div>
+
+            <div class="results-card">
+              <p class="results-title">MegaDepth-1500 · pose AUC (%) ↑</p>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr><th scope="col">Method</th><th scope="col">@5°</th><th scope="col">@10°</th><th scope="col">@20°</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><th scope="row">RoMa-Ω + PoseLib</th><td>70.25</td><td>81.51</td><td>89.22</td></tr>
+                    <tr><th scope="row">PoseAgent <span class="cite">preprint</span></th><td>71.6</td><td>—</td><td>—</td></tr>
+                    <tr><th scope="row">EVGR, three-source router</th><td>71.27</td><td>—</td><td>—</td></tr>
+                    <tr class="ours"><th scope="row">EVGR + dominance switch</th><td><strong>71.87</strong></td><td><strong>83.00</strong></td><td><strong>90.30</strong></td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="results-note">Router seed 20261021 shown; seed 20261020 gives 71.71 / 82.85 / 90.23 (three-source router: 71.13). The system was frozen and run once on the test set. The router keeps the matching pose for 75% of pairs and picks the depth-assisted pose for 24%.</p>
+              <p class="results-note">Same codebase: ScanNet-1500 AUC@5 36.49% (direct camera recipe); RUBIK 16,500 pairs, 62.13% success (R &lt; 5°, t &lt; 2 m).</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- ============ Form2Frame ============ -->
+        <article class="project" id="form2frame">
+          <header class="project-head">
+            <p class="project-meta"><span>Research in progress</span><span aria-hidden="true">·</span><span>Multi-view hand reconstruction</span></p>
+            <h3>Form2Frame</h3>
+            <p class="project-subtitle">Calibrated multi-view hand meshes from frozen monocular priors</p>
+          </header>
+
+          <a class="project-figure" href="assets/images/form2frame-architecture.png" target="_blank" rel="noreferrer" aria-label="Open the full Form2Frame architecture figure">
+            <img src="assets/images/form2frame-architecture.png" width="2800" height="1089" loading="lazy" alt="Form2Frame architecture in three stages: calibrated evidence formation with per-joint view weights and confidence-weighted DLT, scaffold-guided metric placement of HaMeR and WiLoR meshes by robust Sim(3), and evidence-guided regional fusion where each anatomical region selects its source candidate.">
+          </a>
+
+          <div class="project-body">
+            <div class="project-text">
+              <p class="project-summary">
+                Given synchronized RGB crops and known cameras, Form2Frame returns a 778-vertex
+                MANO-topology mesh in the reference camera's metric frame. HaMeR and WiLoR stay
+                frozen. Only a small cross-view module and a regional scorer are trained.
+              </p>
+              <ul class="ideas">
+                <li><strong>Support follows visibility.</strong> Per-joint view weights combine the reprojection residual with a learned support term, so occluded views lose weight before triangulation.</li>
+                <li><strong>One metric frame.</strong> Every monocular mesh is placed onto the triangulated scaffold by robust Sim(3) (IRLS, Huber loss), forming a reliability-weighted anchor mesh.</li>
+                <li><strong>Each region picks its source.</strong> Six anatomical regions allocate weight across up to 16 HaMeR/WiLoR candidates using geometric agreement and paired image evidence.</li>
+              </ul>
+            </div>
+
+            <div class="results-card">
+              <p class="results-title">MPVPE / mesh MPJPE (mm) ↓ · metric frame, no alignment</p>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr><th scope="col">Method</th><th scope="col">DexYCB-MV</th><th scope="col">HO3D-MV</th><th scope="col">HanCo</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><th scope="row">HaMeR, uniform triangulation</th><td>6.10 / 5.98</td><td>6.75 / 6.55</td><td>6.32 / 5.99</td></tr>
+                    <tr><th scope="row">WiLoR, uniform triangulation</th><td>6.94 / 6.84</td><td>6.75 / 6.51</td><td>5.69 / 5.37</td></tr>
+                    <tr><th scope="row">Anchor only (no fusion)</th><td>4.80 / 4.76</td><td>5.64 / 5.40</td><td>5.94 / 5.60</td></tr>
+                    <tr class="ours"><th scope="row">Form2Frame</th><td><strong>4.49 / 4.39</strong></td><td><strong>5.58 / 5.31</strong></td><td><strong>4.45 / 4.10</strong></td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="results-note">MPVPE falls 26.4% on DexYCB-MV and 29.6% on HanCo relative to HaMeR triangulation. No root subtraction, scale fitting or Procrustes alignment. HO3D-MV overlaps the priors' training data; on an independent HO3D split the regional stage does not yet beat its anchor, which is the current focus.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- ============ CondDepth ============ -->
+        <article class="project" id="conddepth">
+          <header class="project-head">
+            <p class="project-meta"><span>Research in progress</span><span aria-hidden="true">·</span><span>Monocular metric reconstruction</span></p>
+            <h3>CondDepth</h3>
+            <p class="project-subtitle">Camera-space hand reconstruction from a single RGB image and known intrinsics</p>
+          </header>
+
+          <a class="project-figure" href="assets/images/conddepth-architecture.png" target="_blank" rel="noreferrer" aria-label="Open the full CondDepth architecture figure">
+            <img src="assets/images/conddepth-architecture.png" width="3600" height="1440" loading="lazy" alt="CondDepth architecture. A frozen WiLoR backbone gives root-relative MANO geometry, a visual token and a native camera translation. Trained query decoders, radial refinement along camera rays and a ridge readout predict the camera-space wrist, which places the hand in the camera frustum without alignment.">
+          </a>
+
+          <div class="project-body">
+            <div class="project-text">
+              <p class="project-summary">
+                CondDepth keeps WiLoR's root-relative hand shape and replaces only its absolute
+                placement. Trained readouts predict where the wrist sits along its camera ray,
+                using the frozen visual token, the predicted geometry and the camera intrinsics.
+              </p>
+              <ul class="ideas">
+                <li><strong>Scale is a gauge, not a size.</strong> WiLoR's native scale compensates for pose and projection errors. Inserting anatomically correct scale makes placement worse, so the root is corrected instead.</li>
+                <li><strong>Placement along the ray.</strong> Query decoders cross-attend to spatial tokens and camera rays; radial heads then refine depth along each ray before a fixed-weight ensemble.</li>
+                <li><strong>Whole population kept.</strong> Missed detections fall back to a camera-conditioned prior or a bounded full-image rescue, and they stay in the error mean.</li>
+              </ul>
+            </div>
+
+            <div class="results-card">
+              <p class="results-title">Camera-space MPJPE (mm) ↓ · single RGB + K, no alignment</p>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr><th scope="col">Dataset</th><th scope="col">ScaleHP <span class="cite">reported</span></th><th scope="col">CondDepth</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><th scope="row">DexYCB (S0)</th><td>30.0</td><td class="ours-cell"><strong>27.40</strong></td></tr>
+                    <tr><th scope="row">HO3D v3</th><td>33.4</td><td class="ours-cell"><strong>32.39</strong></td></tr>
+                    <tr><th scope="row">FreiHAND</th><td><strong>35.8</strong></td><td class="ours-cell">38.98</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="results-note">ScaleHP numbers are its published point estimates; detector and training populations differ, so this is not a paired test. DexYCB scores all 78,768 valid frames, including failed detections. Work on closing the FreiHAND gap continues with an end-to-end metric decoder that learns physical scale.</p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- ============ Engineering ============ -->
+      <section class="content-section engineering-section" id="engineering" aria-labelledby="engineering-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Open source</p>
+            <h2 id="engineering-title">Engineering</h2>
           </div>
         </div>
 
-        <div class="project-list">
-          <article class="project-row">
-            <a class="project-visual" href="assets/images/metricmvhand.png" target="_blank" rel="noreferrer" aria-label="Open the hand reconstruction project figure">
-              <img src="assets/images/metricmvhand.png" width="1200" height="675" loading="lazy" alt="Earlier hand reconstruction pipeline with observation correction, view weighting, weighted triangulation, and hand-prior coupling.">
-            </a>
-            <div class="project-copy">
-              <p class="project-meta"><span>Research in progress</span><span aria-hidden="true">·</span><span>Multi-view hand reconstruction</span></p>
-              <h3>Form2Frame</h3>
-              <p class="project-subtitle">Prior-Preserving Evidence Fusion for Multi-View Hand Reconstruction</p>
-              <p class="project-summary">Form2Frame places HaMeR and WiLoR hand meshes in a shared metric frame, then fuses complementary candidates across anatomical regions using geometric and visual evidence. A retained baseline mesh provides a fallback.</p>
-              <p class="evidence">Evaluated on HanCo, DexYCB-MV, and HO3D-MV. DexYCB-MV: 4.398 mm MPVPE and 4.316 mm mesh MPJPE.</p>
-            </div>
-          </article>
+        <article class="project" id="robust-3dgs">
+          <header class="project-head">
+            <p class="project-meta"><span>Public repository</span><span aria-hidden="true">·</span><span>Sparse-view 3D Gaussian Splatting</span></p>
+            <h3>Robust Sparse 3DGS</h3>
+            <p class="project-subtitle">Sparse-view reconstruction, numerical stability and camera-error repair</p>
+          </header>
 
-          <article class="project-row">
-            <a class="project-visual" href="assets/images/extreme-view.png" target="_blank" rel="noreferrer" aria-label="Open the relative-pose project figure">
-              <img src="assets/images/extreme-view.png" width="1200" height="675" loading="lazy" alt="Earlier relative-pose pipeline showing separate hypothesis fitting and verification.">
-            </a>
-            <div class="project-copy">
-              <p class="project-meta"><span>Research in progress</span><span aria-hidden="true">·</span><span>Two-view geometry</span></p>
-              <h3>Extreme-View Geometry Recovery (EVGR)</h3>
-              <p class="project-subtitle">Multi-Crop Verification for Relative Pose Estimation</p>
-              <p class="project-summary">EVGR generates five relative-pose candidates from global and crop-based matches, scores them against shared multi-crop correspondences using geometric consistency, and refines the selected pose using its supporting correspondences.</p>
-              <p class="evidence">Evaluated on 30,557 AerialExtreMatch pairs, with a separate A800 reference replay on a 4,096-pair subset.</p>
-            </div>
-          </article>
+          <a class="project-figure" href="assets/images/robust-sparse-3dgs.png" target="_blank" rel="noreferrer" aria-label="Open the full Robust Sparse 3DGS overview figure">
+            <img src="assets/images/robust-sparse-3dgs.png" width="3600" height="1540" loading="lazy" alt="Robust Sparse 3DGS overview: a COLMAP or VGGT to gsplat pipeline with an initialization guard, a diagnosis showing a 1 degree camera rotation costs up to 3.2 dB of held-out PSNR, and a rotation-only camera transfer from bundle adjustment that recovers 2.35 to 2.61 dB.">
+          </a>
 
-          <article class="project-row">
-            <a class="project-visual" href="assets/images/conddepth.png" target="_blank" rel="noreferrer" aria-label="Open the CondDepth architecture figure">
-              <img src="assets/images/conddepth.png" width="1200" height="675" loading="lazy" alt="Earlier CondDepth pipeline showing root calibration for camera-space placement.">
-            </a>
-            <div class="project-copy">
-              <p class="project-meta"><span>Research in progress</span><span aria-hidden="true">·</span><span>Geometric calibration</span></p>
-              <h3>CondDepth</h3>
-              <p class="project-subtitle">Local-Tangent Ray Calibration for Metric Hand Reconstruction</p>
-              <p class="project-summary">CondDepth learns camera- and joint-specific corrections in the local tangent plane of predicted camera rays while keeping the vision model frozen. The corrected rays are triangulated to recover metric 3D hand joints.</p>
-              <p class="evidence">DexYCB development evaluation with oracle crops and 2,040 labeled calibration views: 20.35 mm median CS-MPJPE, versus 26.95 mm for matched-label readout adaptation.</p>
+          <div class="project-body">
+            <div class="project-text">
+              <p class="project-summary">
+                A COLMAP / VGGT → gsplat workflow for sparse-view training, held-out rendering,
+                PLY export and a local WebGL viewer. The engineering focus is failure analysis:
+                every fix is tested against a frozen contract on matched experiment arms.
+              </p>
+              <ul class="ideas">
+                <li><strong>Initialization guard.</strong> Duplicate points produced zero nearest-neighbour scales and log(0); only the degenerate scales are clamped.</li>
+                <li><strong>Camera error isolated.</strong> A controlled 1° rotation costs 0.91 / 3.20 dB on Bonsai / Room. Photometric repair and full BA camera transfer both failed their contracts.</li>
+                <li><strong>Rotation-only transfer.</strong> Take BA's rotation, keep each input camera centre, hold cameras fixed during training.</li>
+              </ul>
+              <div class="inline-links">
+                <a href="https://github.com/ada-zy2425/robust-sparse-3dgs" target="_blank" rel="noreferrer">Code <span aria-hidden="true">↗</span></a>
+              </div>
             </div>
-          </article>
-        </div>
+
+            <div class="results-card">
+              <p class="results-title">Garden, frozen rule · two unseen camera perturbations</p>
+              <div class="stat-grid">
+                <div><span class="mini-value">+2.61 dB</span><span class="mini-label">PSNR, seed 2718</span></div>
+                <div><span class="mini-value">+2.35 dB</span><span class="mini-label">PSNR, seed 3141</span></div>
+                <div><span class="mini-value">96.4%</span><span class="mini-label">injected rotation recovered</span></div>
+                <div><span class="mini-value">96.8%</span><span class="mini-label">injected rotation recovered</span></div>
+              </div>
+              <p class="results-note">24 training and 24 held-out views, 7k steps; SSIM rises and LPIPS falls for both seeds. PSNR improves on 24/24 and 23/24 held-out views; the one regression is kept in the report as a counterexample.</p>
+            </div>
+          </div>
+        </article>
       </section>
 
       <section class="content-section publication-section" id="publications" aria-labelledby="publications-title">
@@ -141,7 +320,7 @@
     </footer>
 
     <script type="application/ld+json">
-      {"@context":"https://schema.org","@type":"Person","name":"Zhilu Yang","url":"https://ada-zy2425.github.io/","email":"mailto:yyang121013@gmail.com","jobTitle":"MSc Student and 3D Vision Researcher","affiliation":{"@type":"CollegeOrUniversity","name":"Imperial College London","url":"https://www.imperial.ac.uk/"},"sameAs":["https://github.com/ada-zy2425"],"knowsAbout":["3D vision","multi-view geometry","metric reconstruction","spatial intelligence"]}
+      {"@context":"https://schema.org","@type":"Person","name":"Zhilu Yang","url":"https://ada-zy2425.github.io/","email":"mailto:yyang121013@gmail.com","jobTitle":"MSc Student and 3D Vision Researcher","affiliation":{"@type":"CollegeOrUniversity","name":"Imperial College London","url":"https://www.imperial.ac.uk/"},"sameAs":["https://github.com/ada-zy2425"],"knowsAbout":["3D vision","multi-view geometry","relative pose estimation","metric hand reconstruction","3D Gaussian splatting"]}
     </script>
   </div>
 </body>
