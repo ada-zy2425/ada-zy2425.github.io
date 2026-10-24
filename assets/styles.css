@@ -266,8 +266,6 @@ h1 {
 .project-figure:hover { border-color: #b9cbd5; box-shadow: 0 16px 40px rgb(25 42 53 / 10%); transform: translateY(-2px); }
 .project-figure img { width: 100%; }
 
-.project-figure-dark { padding: 0; background: #0e1a25; border-color: #0e1a25; }
-.project-figure-dark img { border-radius: 10px; }
 
 .project-text { max-width: 860px; }
 .project-text p { margin-bottom: 12px; color: #4c5963; font-size: .98rem; line-height: 1.72; }
@@ -328,7 +326,6 @@ footer div { display: flex; gap: 22px; }
   .content-section { padding: 64px 22px 68px; }
   .section-heading { display: block; margin-bottom: 20px; }
   .project-figure { padding: 4px; }
-  .project-figure-dark { padding: 0; }
   .project-head h3 { font-size: 1.4rem; }
   .section-heading .section-note { margin-top: 10px; }
   footer { min-height: 80px; padding: 0 22px; }
