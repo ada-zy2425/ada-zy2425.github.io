@@ -10,7 +10,7 @@
   --accent-soft: #eef5f8;
   --canvas: #eef1f2;
   --paper: #ffffff;
-  --max-width: 1160px;
+  --max-width: 972px;
 }
 
 * { box-sizing: border-box; }
@@ -96,7 +96,7 @@ footer a:hover { color: var(--accent); }
   padding: 30px 56px 22px;
 }
 
-.hero-copy { max-width: 740px; }
+.hero-copy { max-width: none; }
 
 .eyebrow,
 .section-kicker {
@@ -133,7 +133,7 @@ h1 {
 .institution { margin-bottom: 22px; color: var(--muted); font-size: .96rem; }
 
 .intro {
-  max-width: 640px;
+  max-width: none;
   margin-bottom: 23px;
   color: #34434e;
   font-size: 1.06rem;
@@ -184,7 +184,6 @@ h1 {
   margin: 0;
   align-self: center;
   justify-self: end;
-  transform: translateX(-18px);
   overflow: hidden;
   background: #dde5e7;
   border: 1px solid #d8dfe2;
@@ -236,7 +235,7 @@ h1 {
 }
 .project + .project { margin-top: 40px; }
 
-.project-head { max-width: 860px; margin-bottom: 20px; }
+.project-head { margin-bottom: 20px; }
 
 .project-meta {
   display: flex;
@@ -277,7 +276,7 @@ h1 {
 .project-figure img { width: 100%; }
 
 
-.project-text { max-width: 860px; }
+.project-text { max-width: none; }
 .project-text p { margin-bottom: 12px; color: #4c5963; font-size: .98rem; line-height: 1.72; }
 
 .project-text .result {
