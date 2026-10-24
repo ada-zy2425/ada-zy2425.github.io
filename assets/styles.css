@@ -93,7 +93,7 @@ footer a:hover { color: var(--accent); }
   grid-template-columns: minmax(0, 1fr) 168px;
   gap: 42px;
   align-items: start;
-  padding: 30px 56px 40px;
+  padding: 30px 56px 22px;
 }
 
 .hero-copy { max-width: 740px; }
@@ -195,8 +195,7 @@ h1 {
 .portrait-frame img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center; }
 
 .content-section {
-  padding: 44px 56px 36px;
-  border-top: 1px solid var(--line);
+  padding: 20px 56px 22px;
   scroll-margin-top: 24px;
 }
 
@@ -223,7 +222,7 @@ h1 {
   scroll-margin-top: 24px;
 }
 
-.project:first-of-type { padding-top: 30px; }
+.project:first-of-type { padding-top: 14px; border-top: 0; }
 .project + .project { margin-top: 40px; }
 
 .project-head { max-width: 860px; margin-bottom: 20px; }
@@ -290,7 +289,6 @@ h1 {
 
 .project-text .inline-links { margin-top: 4px; }
 
-.engineering-section { background: #fbfcfc; }
 
 
 footer {
@@ -310,8 +308,8 @@ footer div { display: flex; gap: 22px; }
 @media (max-width: 900px) {
   .site-shell { width: min(calc(100% - 32px), var(--max-width)); margin: 16px auto; }
   .topbar, footer { padding-right: 38px; padding-left: 38px; }
-  .hero { grid-template-columns: minmax(0, 1fr) 158px; gap: 32px; padding: 30px 38px 40px; }
-  .content-section { padding: 44px 38px 48px; }
+  .hero { grid-template-columns: minmax(0, 1fr) 158px; gap: 32px; padding: 30px 38px 22px; }
+  .content-section { padding: 18px 38px 22px; }
 }
 
 @media (max-width: 720px) {
@@ -319,11 +317,11 @@ footer div { display: flex; gap: 22px; }
   .site-shell { width: 100%; margin: 0; border: 0; box-shadow: none; }
   .topbar { min-height: 56px; padding: 0 22px; }
   .topbar nav { gap: 18px; font-size: .83rem; }
-  .hero { grid-template-columns: 1fr; gap: 26px; padding: 30px 22px 40px; }
+  .hero { grid-template-columns: 1fr; gap: 26px; padding: 30px 22px 22px; }
   .hero-copy { max-width: none; }
   h1 { font-size: clamp(1.85rem, 8vw, 2rem); }
   .portrait-frame { width: min(100%, 152px); margin-top: 0; align-self: start; justify-self: start; transform: none; }
-  .content-section { padding: 40px 22px 44px; }
+  .content-section { padding: 16px 22px 22px; }
   .section-heading { display: block; margin-bottom: 20px; }
   .project-figure { padding: 4px; }
   .project-head h3 { font-size: 1.4rem; }
