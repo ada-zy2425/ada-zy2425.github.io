@@ -195,7 +195,8 @@ h1 {
 .portrait-frame img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center; }
 
 .content-section {
-  padding: 20px 56px 22px;
+  position: relative;
+  padding: 40px 56px 22px;
   scroll-margin-top: 24px;
 }
 
@@ -204,7 +205,7 @@ h1 {
   gap: 36px;
   align-items: end;
   justify-content: space-between;
-  margin-bottom: 14px;
+  margin-bottom: 22px;
 }
 
 .section-heading h2 {
@@ -222,7 +223,17 @@ h1 {
   scroll-margin-top: 24px;
 }
 
-.project:first-of-type { padding-top: 14px; border-top: 0; }
+.project:first-of-type { padding-top: 4px; border-top: 0; }
+
+.content-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 56px;
+  left: 56px;
+  height: 1px;
+  background: #edf0f2;
+}
 .project + .project { margin-top: 40px; }
 
 .project-head { max-width: 860px; margin-bottom: 20px; }
@@ -309,7 +320,8 @@ footer div { display: flex; gap: 22px; }
   .site-shell { width: min(calc(100% - 32px), var(--max-width)); margin: 16px auto; }
   .topbar, footer { padding-right: 38px; padding-left: 38px; }
   .hero { grid-template-columns: minmax(0, 1fr) 158px; gap: 32px; padding: 30px 38px 22px; }
-  .content-section { padding: 18px 38px 22px; }
+  .content-section { padding: 34px 38px 22px; }
+  .content-section::before { right: 38px; left: 38px; }
 }
 
 @media (max-width: 720px) {
@@ -321,7 +333,8 @@ footer div { display: flex; gap: 22px; }
   .hero-copy { max-width: none; }
   h1 { font-size: clamp(1.85rem, 8vw, 2rem); }
   .portrait-frame { width: min(100%, 152px); margin-top: 0; align-self: start; justify-self: start; transform: none; }
-  .content-section { padding: 16px 22px 22px; }
+  .content-section { padding: 30px 22px 22px; }
+  .content-section::before { right: 22px; left: 22px; }
   .section-heading { display: block; margin-bottom: 20px; }
   .project-figure { padding: 4px; }
   .project-head h3 { font-size: 1.4rem; }
