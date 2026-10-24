@@ -64,7 +64,7 @@ img { display: block; max-width: 100%; height: auto; }
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  min-height: 72px;
+  min-height: 60px;
   padding: 0 56px;
   border-bottom: 1px solid var(--soft-line);
 }
@@ -93,7 +93,7 @@ footer a:hover { color: var(--accent); }
   grid-template-columns: minmax(0, 1fr) 168px;
   gap: 42px;
   align-items: start;
-  padding: 48px 56px 54px;
+  padding: 30px 56px 40px;
 }
 
 .hero-copy { max-width: 740px; }
@@ -130,7 +130,7 @@ h1 {
   line-height: 1.48;
 }
 
-.institution { margin-bottom: 30px; color: var(--muted); font-size: .96rem; }
+.institution { margin-bottom: 22px; color: var(--muted); font-size: .96rem; }
 
 .intro {
   max-width: 640px;
@@ -195,7 +195,7 @@ h1 {
 .portrait-frame img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center; }
 
 .content-section {
-  padding: 84px 56px 88px;
+  padding: 44px 56px 36px;
   border-top: 1px solid var(--line);
   scroll-margin-top: 24px;
 }
@@ -205,7 +205,7 @@ h1 {
   gap: 36px;
   align-items: end;
   justify-content: space-between;
-  margin-bottom: 24px;
+  margin-bottom: 14px;
 }
 
 .section-heading h2 {
@@ -297,7 +297,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 86px;
+  min-height: 68px;
   padding: 0 56px;
   color: var(--quiet);
   border-top: 1px solid var(--soft-line);
@@ -310,20 +310,20 @@ footer div { display: flex; gap: 22px; }
 @media (max-width: 900px) {
   .site-shell { width: min(calc(100% - 32px), var(--max-width)); margin: 16px auto; }
   .topbar, footer { padding-right: 38px; padding-left: 38px; }
-  .hero { grid-template-columns: minmax(0, 1fr) 158px; gap: 32px; padding: 48px 38px 56px; }
-  .content-section { padding: 72px 38px 76px; }
+  .hero { grid-template-columns: minmax(0, 1fr) 158px; gap: 32px; padding: 30px 38px 40px; }
+  .content-section { padding: 44px 38px 48px; }
 }
 
 @media (max-width: 720px) {
   body { background: var(--paper); }
   .site-shell { width: 100%; margin: 0; border: 0; box-shadow: none; }
-  .topbar { min-height: 64px; padding: 0 22px; }
+  .topbar { min-height: 56px; padding: 0 22px; }
   .topbar nav { gap: 18px; font-size: .83rem; }
-  .hero { grid-template-columns: 1fr; gap: 30px; padding: 50px 22px 60px; }
+  .hero { grid-template-columns: 1fr; gap: 26px; padding: 30px 22px 40px; }
   .hero-copy { max-width: none; }
   h1 { font-size: clamp(1.85rem, 8vw, 2rem); }
   .portrait-frame { width: min(100%, 152px); margin-top: 0; align-self: start; justify-self: start; transform: none; }
-  .content-section { padding: 64px 22px 68px; }
+  .content-section { padding: 40px 22px 44px; }
   .section-heading { display: block; margin-bottom: 20px; }
   .project-figure { padding: 4px; }
   .project-head h3 { font-size: 1.4rem; }
