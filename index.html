@@ -90,7 +90,7 @@
           <header class="project-head">
             <p class="project-meta"><span>Two-view geometry</span></p>
             <h3>Extreme-View Geometry Recovery (EVGR)</h3>
-            <p class="project-subtitle">Routing between complementary relative-pose hypotheses</p>
+            <p class="project-subtitle">Deciding which pose evidence to trust, on outdoor, indoor and driving benchmarks</p>
           </header>
           <a class="project-figure" href="assets/images/evgr-architecture.png" target="_blank" rel="noreferrer" aria-label="Open the full EVGR figure">
             <img src="assets/images/evgr-architecture.png" width="4000" height="1440" loading="lazy" alt="EVGR: three relative-pose hypotheses from dense matching, depth-assisted solving and camera regression; a router predicts each one's error; the default is replaced only on two-axis dominance.">
@@ -98,14 +98,30 @@
           <div class="project-text">
             <p>
               Dense matching, depth-assisted solving and direct camera regression each fail on
-              different image pairs. EVGR keeps all three as complete pose hypotheses and trains
-              a small router that predicts each one's rotation and translation error from
-              geometry alone. It leaves the matching pose only when another candidate is
-              predicted better on both axes.
+              different image pairs, and the evidence that reveals a failure is different on
+              each benchmark. EVGR keeps complete pose hypotheses and acts where that evidence
+              is: on MegaDepth a small router predicts each candidate's rotation and translation
+              error and leaves the matching pose only when another is predicted better on both
+              axes; on RUBIK certified matches feed the metric scale fit; on ScanNet calibrated
+              precision fusion combines strong regressors with an abstaining gate.
             </p>
             <p class="result">
-              71.87% AUC@5 on MegaDepth-1500 (71.71% with a second seed), up from 70.25% for
-              RoMa-Ω with PoseLib and above the 71.6% reported by the PoseAgent preprint.
+              MegaDepth-1500: 71.56% / 71.61% AUC@5 (two seeds, one-shot frozen test), up from
+              70.25% for RoMa-Ω with PoseLib and level with the 71.5% / 71.6% reported by the
+              PoseAgent preprint.
+            </p>
+            <p class="result">
+              RUBIK (16,500 pairs): 65.50% success at 5° / 2 m under the official protocol,
+              up from 62.46% for our full-matching baseline and above the 60.3% of Alligat0R.
+            </p>
+            <p class="result">
+              ScanNet-1500: 40.13% AUC@5 for the fused system, against 37.99% for π³ under the
+              same protocol and 36.97% reported by Speed3R. Most of the gain comes from its
+              strongest member, Pi3X conditioned on intrinsics (40.48% alone).
+            </p>
+            <p>
+              A single reliability mechanism shared by all three benchmarks is the open problem
+              we are working on now.
             </p>
           </div>
         </article>
