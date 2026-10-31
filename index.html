@@ -116,19 +116,22 @@
             <h3>CondDepth</h3>
             <p class="project-subtitle">Camera-space hand placement from a single RGB image</p>
           </header>
-          <a class="project-figure" href="assets/images/conddepth-architecture.png" target="_blank" rel="noreferrer" aria-label="Open the full CondDepth figure">
-            <img src="assets/images/conddepth-architecture.png" width="4000" height="1440" loading="lazy" alt="CondDepth: frozen WiLoR evidence, a ray-conditioned root readout, and metric placement of the hand in the camera frustum.">
+          <a class="project-figure" href="assets/images/conddepth-architecture.png?v=20261031" target="_blank" rel="noreferrer" aria-label="Open the full CondDepth figure">
+            <img src="assets/images/conddepth-architecture.png?v=20261031" width="4000" height="1440" loading="lazy" alt="CondDepth: frozen WiLoR evidence, a ray-conditioned root readout, and metric placement of the hand in the camera frustum. Camera-space MPJPE: DexYCB 27.4 mm versus 30.0 for ScaleHP, HO3D v3 32.4 mm versus 33.4, FreiHAND 38.9 mm.">
           </a>
           <div class="project-text">
             <p>
               In a single image, hand size and depth are confounded. WiLoR's native scale
               turns out to be a gauge that absorbs pose and projection error, not a physical
               size. CondDepth therefore keeps WiLoR's hand shape and learns only where the
-              wrist sits along its camera ray.
+              wrist sits along its camera ray, so one mechanism places the hand in metric
+              camera space across three benchmarks.
             </p>
             <p class="result">
-              Camera-space MPJPE of 27.40 mm on DexYCB and 32.39 mm on HO3D v3, below the
-              30.0 and 33.4 mm reported for ScaleHP. FreiHAND is the current target.
+              Camera-space MPJPE of 27.40 mm on DexYCB and 32.39 mm on HO3D v3, outperforming
+              ScaleHP, the strongest reported camera-space method (30.0 and 33.4 mm), and
+              38.92 mm on FreiHAND. All from one RGB image with known intrinsics, scored with
+              no alignment.
             </p>
           </div>
         </article>
