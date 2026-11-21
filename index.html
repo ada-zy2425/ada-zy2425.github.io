@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zhilu Yang | 3D Vision</title>
+  <meta name="description" content="Zhilu Yang works on 3D vision: multi-view geometry, 3D reconstruction and camera pose estimation.">
+  <meta name="author" content="Zhilu Yang">
+  <link rel="canonical" href="https://ada-zy2425.github.io/">
+  <link rel="stylesheet" href="assets/site.css?v=20261121b">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Zhilu Yang | 3D Vision">
+  <meta property="og:description" content="3D reconstruction, multi-view geometry and camera pose estimation.">
+  <meta property="og:url" content="https://ada-zy2425.github.io/">
+  <meta property="og:image" content="https://ada-zy2425.github.io/assets/og-card.png">
+  <link rel="icon" href="data:,">
+</head>
+<body>
+  <main class="page">
+    <header class="header">
+      <div>
+        <h1>Zhilu Yang</h1>
+        <p>MSc in Environmental Data Science and Machine Learning (Distinction)</p>
+        <p>Imperial College London</p>
+        <p class="contact">
+          <a href="mailto:yyang121013@gmail.com">Email</a>
+          <a href="https://github.com/ada-zy2425" target="_blank" rel="me noreferrer">GitHub</a>
+        </p>
+      </div>
+      <img src="assets/images/zhilu-profile-crop-v3.webp" width="512" height="640" alt="Zhilu Yang">
+    </header>
+
+    <section class="about">
+      <h2>About Me</h2>
+      <p>
+        I work on 3D computer vision: multi-view geometry, 3D reconstruction and camera pose
+        estimation. I am interested in recovering reliable metric 3D geometry when views,
+        models or detectors disagree or fail.
+      </p>
+    </section>
+
+    <section>
+      <h2>Selected Research</h2>
+
+      <article class="item">
+        <a class="thumb" href="https://ada-zy2425.github.io/AlignHand/" target="_blank" rel="noreferrer">
+          <img src="assets/images/thumb-alignhand.webp" loading="lazy" alt="AlignHand turns independent per-view hand meshes into one metric hand.">
+        </a>
+        <div class="info">
+          <h3>AlignHand: Multi-View Hand Reconstruction from a Frozen Monocular Prior</h3>
+          <p><strong>Zhilu Yang</strong>, Kun Yang, Shiyan Wang, Anqi Xu, Xinran Huang, Yizheng Jiao, Huan Yang, Rolandos Alexandros Potamias</p>
+          <p class="venue">Preprint, 2026</p>
+          <p class="desc">Turns conflicting per-view predictions of a frozen monocular hand model into one metric hand mesh, with 30% lower vertex error than a matched geometric baseline.</p>
+          <p class="links">
+            <a href="https://ada-zy2425.github.io/AlignHand/" target="_blank" rel="noreferrer">[Project Page]</a>
+            <a href="https://ada-zy2425.github.io/AlignHand/static/AlignHand.pdf" target="_blank" rel="noreferrer">[Paper]</a>
+            <a href="https://github.com/ada-zy2425/AlignHand" target="_blank" rel="noreferrer">[Code]</a>
+          </p>
+        </div>
+      </article>
+
+      <article class="item">
+        <div class="thumb">
+          <img src="assets/images/thumb-evipose.webp" loading="lazy" alt="Dense matching, depth-assisted solving and pose regression produce complementary pose hypotheses.">
+        </div>
+        <div class="info">
+          <h3>EviPose: Evidence-Driven Two-View Relative Pose Estimation</h3>
+          <p class="venue">Ongoing research</p>
+          <p class="desc">Complementary geometric observations, task-aligned pose recovery and evidence-based fallback, evaluated on MegaDepth-1500, ScanNet-1500 and RUBIK.</p>
+        </div>
+      </article>
+
+      <article class="item">
+        <div class="thumb">
+          <img src="assets/images/thumb-placehand.webp" loading="lazy" alt="A single RGB image with known intrinsics; hand size and depth are confounded.">
+        </div>
+        <div class="info">
+          <h3>PlaceHand: Monocular 3D Hand Reconstruction and Camera-Space Placement</h3>
+          <p class="venue">Ongoing research</p>
+          <p class="desc">Places the hand in metric camera space from one RGB image, with detection-aware recovery when the hand detector fails.</p>
+        </div>
+      </article>
+    </section>
+
+    <section>
+      <h2>Open Source</h2>
+
+      <article class="item">
+        <a class="thumb" href="https://github.com/ada-zy2425/robust-sparse-3dgs" target="_blank" rel="noreferrer">
+          <img src="assets/images/thumb-3dgs.webp" loading="lazy" alt="Sparse-view 3D Gaussian reconstruction from 24 photos and a held-out rendering.">
+        </a>
+        <div class="info">
+          <h3>Robust Sparse 3DGS: Sparse-View Reconstruction under Camera Perturbation</h3>
+          <p class="desc">A COLMAP / VGGT → gsplat pipeline with held-out evaluation and a WebGL viewer; rotation-only camera correction recovers over 96% of injected rotation error.</p>
+          <p class="links">
+            <a href="https://github.com/ada-zy2425/robust-sparse-3dgs" target="_blank" rel="noreferrer">[Code]</a>
+          </p>
+        </div>
+      </article>
+    </section>
+
+    <footer>© 2026 Zhilu Yang</footer>
+  </main>
+</body>
+</html>

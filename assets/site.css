@@ -1,0 +1,83 @@
+:root {
+  --text: #1f2328;
+  --muted: #5b636b;
+  --link: #1a5fb4;
+  --rule: #e3e6e8;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  color: var(--text);
+  background: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.page { max-width: 880px; margin: 0 auto; padding: 48px 24px 40px; }
+
+.header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 150px;
+  gap: 32px;
+  align-items: center;
+}
+
+.header h1 { margin: 0 0 6px; font-size: 30px; font-weight: 600; letter-spacing: -0.01em; }
+.header .cn { font-weight: 400; color: var(--muted); }
+.header p { margin: 2px 0; color: var(--muted); }
+.header .contact { margin-top: 12px; }
+.header .contact a { margin-right: 14px; }
+.header img { width: 150px; height: auto; border-radius: 6px; }
+
+h2 {
+  margin: 40px 0 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--rule);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.about p { margin: 12px 0 0; }
+
+.item {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 24px;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.item:last-child { border-bottom: 0; }
+
+.thumb {
+  display: block;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+}
+.thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+.info h3 { margin: 0 0 4px; font-size: 16px; font-weight: 600; line-height: 1.45; }
+.info p { margin: 3px 0; font-size: 14px; color: var(--muted); }
+.info .venue { font-style: italic; }
+.info .desc { color: var(--text); }
+.info .links a { margin-right: 10px; }
+
+footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
+
+@media (max-width: 640px) {
+  .page { padding: 32px 18px; }
+  .header { grid-template-columns: 1fr; }
+  .header img { width: 130px; order: -1; }
+  .item { grid-template-columns: 1fr; gap: 12px; }
+}
